@@ -128,18 +128,19 @@ li .channel-meta span {
     background-color: #3F51B5;
     color: white;
     /* appearance */
-    margin:2px;
-    padding:2px;
-    border-radius:2px;
-    font-size:10px;
+    margin: 2px;
+    padding: 2px;
+    border-radius: 2px;
+    font-size: 10px;
 
     /* #8 #channel #centered blue boxes' text content */
     align-self:center;
 }
 
-li i.fa {
+li i.fas, li i.far  {
     /* #7 #icns #small in channels view */
     font-size: 24px;
+    padding-left: 4px;
 }
 
 

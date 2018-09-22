@@ -11,12 +11,15 @@
     <link rel="stylesheet" href="css/style.css"/>
 
     <!-- embed jquery -->
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+			integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+			crossorigin="anonymous"></script>
 
-    <!-- #7 #icns #fa embed font awesome -->
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- #7 embed font awesome -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" /> -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
-    <!-- #7 #chlob #lnk embed external JavaScript file for channel objects -->
+    <!-- #7 embed external JavaScript file for channel objects -->
     <script src="js/channels.js"></script>
 
     <!-- embed external JavaScript file for app interaction -->
@@ -38,71 +41,72 @@
 
     <!-- CHANNELS -->
     <ul>
-        <!-- #8 #remove all #channels
-        <!-- This document will trigger many warning and errors when using the W3C Validator due to comments in comments, which is not allowed. We let them stay so you can check out the solution for Challenge 7.
-        <!-- #7 #chlob #clk calls our switchChannel with the corresponding OBJECT as an argument --
-        <li onclick="switchChannel(yummy)">
+        <!-- #8 #remove all #channels -->
+        <!-- This document will trigger many warning and errors when using the W3C Validator due to comments in comments, which is not allowed. We let them in here so you can check out the solution for Challenge 7. -->
+        <!-- #7  calls our switchChannel with the corresponding OBJECT as an argument -->
+        
+            <!-- <li onclick="switchChannel(yummy)">
             #Yummy
-            <span class="channel-meta">
-                <!-- #7 #icns #chl replace images with icons--
-                <i class="fa fa-star-o"></i>
-                <i class="fa fa-chevron-right"></i>
+            <span class="channel-meta"> -->
+                <!-- #7  replace images with icons-->
+                <!-- <i class="far fa-star"></i>
+                <i class="fas fa-chevron-right"></i>
             </span>
-        </li>
-        <!-- #7 #chlob #clk calls our switchChannel with the corresponding OBJECT as an argument --
-        <li class="selected" onclick="switchChannel(sevencontinents)">
+        </li> -->
+        <!-- #7  calls our switchChannel with the corresponding OBJECT as an argument -->
+        <!-- <li class="selected" onclick="switchChannel(sevencontinents)">
             #SevenContinents
-            <span class="channel-meta">
-                <!-- #7 #icns #chl replace images with icons--
-                <i class="fa fa-star-o"></i>
-                <i class="fa fa-chevron-right"></i>
+            <span class="channel-meta"> -->
+                <!-- #7  replace images with icons-->
+                <!-- <i class="far fa-star"></i>
+                <i class="fas fa-chevron-right"></i>
             </span>
-        </li>
-        <!-- #7 #chlob #clk calls our switchChannel with the corresponding OBJECT as an argument --
-        <li onclick="switchChannel(killerapp)">
+        </li> -->
+        <!-- #7  calls our switchChannel with the corresponding OBJECT as an argument -->
+        <!-- <li onclick="switchChannel(killerapp)">
             #KillerApp
-            <span class="channel-meta">
-                <!-- #7 #icns #chl replace images with icons--
-                <i class="fa fa-star-o"></i>
-                <i class="fa fa-chevron-right"></i>
+            <span class="channel-meta"> -->
+                <!-- #7  replace images with icons-->
+                <!-- <i class="far fa-star"></i>
+                <i class="fas fa-chevron-right"></i>
             </span>
-        </li>
-        <!-- #7 #chlob #clk calls our switchChannel with the corresponding OBJECT as an argument --
-        <li onclick="switchChannel(firstpersononmars)">
+        </li> -->
+        <!-- #7  calls our switchChannel with the corresponding OBJECT as an argument -->
+        <!-- <li onclick="switchChannel(firstpersononmars)">
             #FirstPersonOnMars
-            <span class="channel-meta">
-                <!-- #7 #icns #chl replace images with icons--
-                <i class="fa fa-star-o"></i>
-                <i class="fa fa-chevron-right"></i>
+            <span class="channel-meta"> -->
+                <!-- #7  replace images with icons-->
+                <!-- <i class="far fa-star"></i>
+                <i class="fas fa-chevron-right"></i>
             </span>
-        </li>
-        <!-- #7 #chlob #clk calls our switchChannel with the corresponding OBJECT as an argument --
-        <li onclick="switchChannel(octoberfest)">
+        </li> -->
+        <!-- #7  calls our switchChannel with the corresponding OBJECT as an argument -->
+        <!-- <li onclick="switchChannel(octoberfest)">
             #Octoberfest
-            <span class="channel-meta">
-                <!-- #7 #icns #chl replace images with icons--
-                <i class="fa fa-star-o"></i>
-                <i class="fa fa-chevron-right"></i>
+            <span class="channel-meta"> -->
+                <!-- #7  replace images with icons-->
+                <!-- <i class="far fa-star"></i>
+                <i class="fas fa-chevron-right"></i>
             </span>
-        </li>
-        -->
+        </li> -->
+       
     </ul>
 
     <!-- TAB BAR -->
     <div id="tab-bar">
         <button class="selected" id="tab-new" onclick="selectTab('#tab-new')">
-            <!-- #7 #icns #tab replacing icons -->
-            <i class="fa fa-lightbulb-o"></i>
+            <!-- #7  replacing icons -->
+            <i class="far fa-lightbulb"></i>
             New
         </button>
         <button id="tab-trending" onclick="selectTab('#tab-trending')">
-            <!-- #7 #icns #tab replacing icons -->
-            <i class="fa fa-fire"></i>
+            <!-- #7  replacing icons -->
+            <i class="fas fa-fire"></i>
             Trending
         </button>
         <button id="tab-favorites" onclick="selectTab('#tab-favorites')">
-            <!-- #7 #icns #tab replacing icons -->
-            <i class="fa fa-star"></i>
+            <!-- #7  replacing icons -->
+            <i class="fas fa-star"></i>
             Favorites
         </button>
     </div>
@@ -114,8 +118,8 @@
     <h1>
         <span id="channel-name">#SevenContinents</span>
         <small id="channel-location">by <strong>cheeses.yard.applies</strong></small>
-        <!-- #7 #icns #str: star is now font-awesome -->
-        <i class="fa fa-star" onclick="star()"></i>
+        <!-- #7 star is now font-awesome -->
+        <i class="fas fa-star" onclick="star()"></i>
     </h1>
 
     <div id="messages">
@@ -170,15 +174,15 @@
     <!-- ChAT BAR -->
     <div id="chat-bar">
         <button id="emojis-button" onclick="toggleEmojis()">
-            <!-- #7 #icns #smile replacing icons -->
-            <i class="fa fa-smile-o"></i>
+            <!-- #7 replacing icons -->
+            <i class="far fa-smile"></i>
         </button>
         <div id="emojis">&#x1F601; &#x1F602; &#x1F603; &#x1F604; &#x1F605; &#x1F606; &#x1F607;</div>
-        <!-- #8 create a new #input #element which accepts text and has a #prefill as well as a character #imit.
-               For #real, it also gets an id -->
+        <!-- #8 create a new input element which accepts text and has a prefill as well as a character limit.
+               It also gets an id -->
         <input type="text" placeholder="Message..." maxlength="140" id="message">
-        <!-- #8 #message #send requires a button -->
-        <button onclick="sendMessage()"><i class="fa fa-arrow-right"></i></button>
+        <!-- #8 send message requires a button -->
+        <button onclick="sendMessage()"><i class="fas fa-arrow-right"></i></button>
     </div>
 </div>
 
