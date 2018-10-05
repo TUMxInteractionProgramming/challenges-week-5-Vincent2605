@@ -1,190 +1,109 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8" />
     <title>chatter|app</title>
 
-    <!-- embed the roboto font. This needs to go above your css -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
+    <!--linked jQuery source-->
+    <script   src="https://code.jquery.com/jquery-3.3.1.min.js"   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="   crossorigin="anonymous"></script>
+    
+    <script src="js/emoji.js"></script>
 
-    <!-- embed external css -->
-    <link rel="stylesheet" href="css/style.css"/>
-
-    <!-- embed jquery -->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
-			integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-			crossorigin="anonymous"></script>
-
-    <!-- #7 embed font awesome -->
-    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" /> -->
+    <!--linked fontawesome source-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-
-    <!-- #7 embed external JavaScript file for channel objects -->
+    
+    <!--linked CSS stylesheet-->
+    <link rel="stylesheet" href="css/style.css" />
+    
+    <!--linked javascript files-->
     <script src="js/channels.js"></script>
-
-    <!-- embed external JavaScript file for app interaction -->
     <script src="js/script.js"></script>
+
 
 </head>
 
-<!-- #8 #channel #onload all channels when the body has loaded -->
-<body onload="listChannels()">
+<!--onload the function listChannels() is executed to load the channels and the function switchChannel() to select the onloaded channel-->
+<body onload="listChannels(compareTrending); switchChannel(currentChannel)">
+    
+    <!--leftside of the app-->
+    <div id="leftside" class="md-whiteframe-16dp">
+    
+    <!--leftside app-bar-->
+    <div class="app-bar md-whiteframe-4dp">
+            <h1>
+            <img src="https://ip.lfe.mw.tum.de/sections/moocus.png" alt="logo" style="height:56px">
+            chatter | app
+            </h1>
+    </div>
 
-<!-- channel area -->
-<div id="channels">
-
-    <!-- APP BAR for APP TITLE -->
-    <h1 id="left-app-bar">
-        <img src="http://ip.lfe.mw.tum.de/sections/moocus.png" alt="Moocus, the chatty duck!" style="height: 56px;">
-        chatter|app
-    </h1>
-
-    <!-- CHANNELS -->
-    <ul>
-        <!-- #8 #remove all #channels -->
-        <!-- This document will trigger many warning and errors when using the W3C Validator due to comments in comments, which is not allowed. We let them in here so you can check out the solution for Challenge 7. -->
-        <!-- #7  calls our switchChannel with the corresponding OBJECT as an argument -->
+    <!--channels list-->
+    <div id="channels">
         
-            <!-- <li onclick="switchChannel(yummy)">
-            #Yummy
-            <span class="channel-meta"> -->
-                <!-- #7  replace images with icons-->
-                <!-- <i class="far fa-star"></i>
-                <i class="fas fa-chevron-right"></i>
-            </span>
-        </li> -->
-        <!-- #7  calls our switchChannel with the corresponding OBJECT as an argument -->
-        <!-- <li class="selected" onclick="switchChannel(sevencontinents)">
-            #SevenContinents
-            <span class="channel-meta"> -->
-                <!-- #7  replace images with icons-->
-                <!-- <i class="far fa-star"></i>
-                <i class="fas fa-chevron-right"></i>
-            </span>
-        </li> -->
-        <!-- #7  calls our switchChannel with the corresponding OBJECT as an argument -->
-        <!-- <li onclick="switchChannel(killerapp)">
-            #KillerApp
-            <span class="channel-meta"> -->
-                <!-- #7  replace images with icons-->
-                <!-- <i class="far fa-star"></i>
-                <i class="fas fa-chevron-right"></i>
-            </span>
-        </li> -->
-        <!-- #7  calls our switchChannel with the corresponding OBJECT as an argument -->
-        <!-- <li onclick="switchChannel(firstpersononmars)">
-            #FirstPersonOnMars
-            <span class="channel-meta"> -->
-                <!-- #7  replace images with icons-->
-                <!-- <i class="far fa-star"></i>
-                <i class="fas fa-chevron-right"></i>
-            </span>
-        </li> -->
-        <!-- #7  calls our switchChannel with the corresponding OBJECT as an argument -->
-        <!-- <li onclick="switchChannel(octoberfest)">
-            #Octoberfest
-            <span class="channel-meta"> -->
-                <!-- #7  replace images with icons-->
-                <!-- <i class="far fa-star"></i>
-                <i class="fas fa-chevron-right"></i>
-            </span>
-        </li> -->
-       
-    </ul>
+        <!--list is created onload through the function listChannels()-->
+        <ul> </ul>
 
-    <!-- TAB BAR -->
-    <div id="tab-bar">
-        <button class="selected" id="tab-new" onclick="selectTab('#tab-new')">
-            <!-- #7  replacing icons -->
-            <i class="far fa-lightbulb"></i>
-            New
-        </button>
-        <button id="tab-trending" onclick="selectTab('#tab-trending')">
-            <!-- #7  replacing icons -->
-            <i class="fas fa-fire"></i>
-            Trending
-        </button>
-        <button id="tab-favorites" onclick="selectTab('#tab-favorites')">
-            <!-- #7  replacing icons -->
-            <i class="fas fa-star"></i>
-            Favorites
-        </button>
-    </div>
-</div>
-
-<div id="chat">
-
-    <!-- APP BAR for CHANNEL TITLE -->
-    <h1>
-        <span id="channel-name">#SevenContinents</span>
-        <small id="channel-location">by <strong>cheeses.yard.applies</strong></small>
-        <!-- #7 star is now font-awesome -->
-        <i class="fas fa-star" onclick="star()"></i>
-    </h1>
-
-    <div id="messages">
-
-        <div class="message own">
-            <h3><a href="http://w3w.co/cheeses.yard.applies" target="_blank"><strong>cheeses.yard.applies</strong></a>
-                Wed, June 20th, 13:37 <em>15 min. left</em></h3>
-            <p>What's the place you folks call home?</p>
-            <button>+5 min.</button>
-        </div>
-
-        <div class="message">
-            <h3><a href="http://w3w.co/truck.cotton.zone" target="_blank"><strong>truck.cotton.zone</strong></a>
-                Wed, June 20th, 13:39 <em>4 min. left</em></h3>
-            <p>BRISBANE! Hang loose!</p>
-            <button>+5 min.</button>
-        </div>
-
-        <div class="message">
-            <h3><a href="http://w3w.co/thus.best.dishes" target="_blank"><strong>thus.best.dishes</strong></a>
-                Wed, June 20th, 14:02 <em>12 min. left</em></h3>
-            <p>The big apple.</p>
-            <button>+5 min.</button>
-        </div>
-
-        <div class="message">
-            <h3><a href="http://w3w.co/driveway.helper.magazine"
-                   target="_blank"><strong>driveway.helper.magazine</strong></a>
-                Wed, June 20th, 14:02 <em>7 min. left</em></h3>
-            <p>Eu sou um Cariocas.</p>
-            <button>+5 min.</button>
-        </div>
-
-        <div class="message">
-            <h3><a href="http://w3w.co/escapes.pitch.saucepan"
-                   target="_blank"><strong>escapes.pitch.saucepan</strong></a>
-                Wed, June 20th, 14:07 <em>14 min. left</em></h3>
-            <p>Greetings from the western cape!</p>
-            <button>+5 min.</button>
-        </div>
-
-        <div class="message">
-            <h3><a href="http://w3w.co/meanings.identity.pays"
-                   target="_blank"><strong>meanings.identity.pays</strong></a>
-                Wed, June 20th, 04:08 <em>15 min. left</em></h3>
-            <p>北京</p>
-            <button>+5 min.</button>
-        </div>
-
+        <!--FAB button-->
+        <button class="dot button-accent" onclick="channelCreationMode()"><i class="fas fa-plus"></i></button>
     </div>
 
-    <!-- ChAT BAR -->
-    <div id="chat-bar">
-        <button id="emojis-button" onclick="toggleEmojis()">
-            <!-- #7 replacing icons -->
+    <!--leftside tap-bar-->
+    <div id="tab-bar" class="md-whiteframe-4dp">
+
+        <!--"new" tab-->
+        <button id="new-button" class="selected-tab" onclick="selectTab('#new-button')"><i class="far fa-lightbulb"></i>New</button>
+        
+        <!--"trending" tab-->
+        <button id="trending-button" onclick="selectTab('#trending-button')"><i class="fas fa-fire"></i>Trending</button>
+        
+        <!--"favorites" tab-->
+        <button id="favorites-button" onclick="selectTab('#favorites-button')"><i class="fas fa-star"></i>Favorites</button>
+    </div>
+    </div>
+
+    
+    <!--rightside of the app-->
+    <div id="rightside">
+
+    <!--rightside app-bar-->
+    <div class="app-bar md-whiteframe-4dp">
+        <h1>
+            <!--title of selcted channel-->
+            <span>#Octoberfest</span>
+            <!--location of selected channel-->
+            <small>by
+                <strong><a href="https://map.what3words.com/allgemein.arten.ordern" target="_blank">allgemein.arten.ordern</a></strong>
+            </small>
+            <!--star rightside app-bar-->
+            <i class="fas fa-star" onclick="likeChannel()"></i>
+        </h1>
+    </div>
+
+    <!--chatarea-->
+
+    <!--messages are stored in the channel objects-->
+    <div id="chat"> </div>
+
+
+    <!--chat-bar-->
+    <div id="chat-bar" class="md-whiteframe-4dp">
+        
+        <!--button to show emojis-->
+        <button id="emojis-button" class="button-primary" onclick="showEmojis()">
             <i class="far fa-smile"></i>
         </button>
-        <div id="emojis">&#x1F601; &#x1F602; &#x1F603; &#x1F604; &#x1F605; &#x1F606; &#x1F607;</div>
-        <!-- #8 create a new input element which accepts text and has a prefill as well as a character limit.
-               It also gets an id -->
-        <input type="text" placeholder="Message..." maxlength="140" id="message">
-        <!-- #8 send message requires a button -->
-        <button onclick="sendMessage()"><i class="fas fa-arrow-right"></i></button>
-    </div>
-</div>
+        
+        <!--emojis window-->
+        <div id="emojis" class="md-whiteframe-24dp">
+            &#x1F601; &#x1F602; &#x1F603; &#x1F604; &#x1F605;
+        </div>
 
+        <!--newMessage-text input field-->
+        <input type="text" id="message-input" name="newmessage" placeholder="Message..." maxlength="140">
+        
+        <!--button to send message-->
+        <button id="send-message-button" class="button-accent" onclick="sendMessage()"><i class="fas fa-chevron-right"></i></button>
+    </div>
+    
+    </div>   
 </body>
 </html>

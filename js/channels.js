@@ -1,48 +1,57 @@
-/** #7 #chlob #new: the new yummy channel */
+/*Channels*/
 
+/* single channel objects and property + values */
 var yummy = {
-    name: "#Yummy",
-    createdOn: new Date(2016, 03, 01), /* month 0 is jan. */
-    createdBy: "minus.plus.yummy",
-    starred: false,
-    expiresIn: 100,
-    messageCount: 999
+    name:"#Yummy",
+    createdOn:new Date(2018, 10, 1),
+    createdBy:"erklaeren.haar.bestimmen",
+    starred:false,
+    expiresIn:3,
+    messageCount:20,
+    messages:[],
 };
-
-/** #7 #chlob #fve: the other channels */
-
-var sevencontinents = {
-    name: "#SevenContinents",
-    createdOn: new Date(2016, 03, 02), /* month 0 is jan. */
-    createdBy: "cheeses.yard.applies",
-    starred: true,
-    expiresIn: 60,
-    messageCount: 5
+var sevenContinents = {
+    name:"#SevenContinents",
+    createdOn:new Date (2018, 10, 2),
+    createdBy:"mops.sampled.roofed",
+    starred:true,
+    expiresIn:10,
+    messageCount:30,
+    messages:[],
 };
-
-var killerapp = {
-    name: "#KillerApp",
-    createdOn: new Date(2016, 08, 30), /* month 0 is jan. */
-    createdBy: "lodge.bits.fake",
-    starred: false,
-    expiresIn: 1,
-    messageCount: 10351
+var killerApp = {
+    name:"#KillerApp",
+    createdOn:new Date (2018, 9, 30),
+    createdBy:"darling.slide.woods",
+    starred:false,
+    expiresIn:6,
+    messageCount:35,
+    messages:[],
 };
-
-var firstpersononmars = {
-    name: "#FirstPersonOnMars",
-    createdOn: new Date(2016, 08, 28), /* month 0 is jan. */
-    createdBy: "snipped.atom.grid",
-    starred: true,
-    expiresIn: 30003,
-    messageCount: 2424
+var firstPersonOnMars = {
+    name:"#FirstPersonOnMars",
+    createdOn:new Date (2018, 9, 29),
+    createdBy:"sunflower.scheduled.redrawn",
+    starred:false,
+    expiresIn:13,
+    messageCount:10,
+    messages:[],
 };
-
 var octoberfest = {
-    name: "#Octoberfest",
-    createdOn: new Date(2016, 08, 25), /* month 0 is jan. */
-    createdBy: "vocally.clearly.crawled",
-    starred: false,
-    expiresIn: 60,
-    messageCount: 321
+    name:"#Octoberfest",
+    createdOn:new Date (2018, 10, 3),
+    createdBy: "allgemein.arten.ordern",
+    starred:true,
+    expiresIn:23,
+    messageCount:7,
+    messages:[],
 };
+
+/* array linking all channels */
+var channels = [
+yummy,
+sevenContinents,
+killerApp,
+firstPersonOnMars,
+octoberfest,
+];

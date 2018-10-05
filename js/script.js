@@ -1,195 +1,279 @@
-/* start the external action and say hello */
-console.log("App is alive");
+console.log('app is alive');
 
-
-/** #7 Create global variable */
+/* global variable of currentluy selected channel */
 var currentChannel;
 
-/** #7 We simply initialize it with the channel selected by default - sevencontinents */
-currentChannel = sevencontinents;
+/* onload selected channel */
+currentChannel = octoberfest;
 
-/** Store my current (sender) location
- */
+/* current location of app user */
 var currentLocation = {
-    latitude: 48.249586,
-    longitude: 11.634431,
-    what3words: "shelf.jetted.purple"
+    longitude: 48.264976,
+    latitude: 11.668641,
+    what3words: "dose.verse.lunged"
 };
 
-/**
- * Switch channels name in the right app bar
- * @param channelObject
- */
+/* function to switch between channels by clicking on the channel row in the channel list */
+/** @param channelObject
+*/
+
 function switchChannel(channelObject) {
-    //Log the channel switch
-    console.log("Tuning in to channel", channelObject);
+    console.log('Turning into channel', channelObject);
+    
+    /* empty messages in chatarea */
+    $('#chat').empty();
+    /* adjusting of the selected channel name in the rightside app-bar */
+    $('#rightside .app-bar h1 span').html(channelObject.name);
+    /* adjusting of the selected channel location in the rightside app-bar shown as w3w */
+    $('#rightside .app-bar h1 strong').html('<a href="https://map.what3words.com/'
+        +channelObject.createdBy
+        +'" target="_blank">'
+        +channelObject.createdBy
+        +'</a>');
+    
+    /* removing of class "selected-channel" from all channels in the list */
+    $('#channels li').removeClass('selected-channel');
 
-    // #7  Write the new channel to the right app bar using object property
-    document.getElementById('channel-name').innerHTML = channelObject.name;
+    /* adding of class "selected-channel" to the recently clicked channel */
+    $('#channels li:contains('+channelObject.name+')').addClass('selected-channel');
+    
+    /* remove of class (solid/ unsolid) of the star in rightside app-bar */
+    $('#rightside .app-bar i').removeClass('fas far');
 
-    //#7  change the channel location using object property
-    document.getElementById('channel-location').innerHTML = 'by <a href="http://w3w.co/'
-        + channelObject.createdBy
-        + '" target="_blank"><strong>'
-        + channelObject.createdBy
-        + '</strong></a>';
-
-    /* #7 remove either class */
-    $('#chat h1 i').removeClass('far fas');
-
-    /* #7 set class according to object property */
-    $('#chat h1 i').addClass(channelObject.starred ? 'fas' : 'far');
-
-
-    /* highlight the selected #channel.
-       This is inefficient (jQuery has to search all channel list items), but we'll change it later on */
-    $('#channels li').removeClass('selected');
-    $('#channels li:contains(' + channelObject.name + ')').addClass('selected');
-
-    /* #7 store selected channel in global variable */
+    /* adding of class depending on the value starred in the channel object */
+    $('#rightside .app-bar i').addClass(channelObject.starred ? 'fas' : 'far');
+    
+    /* defining of recently clicked channel as currently selected channel */
     currentChannel = channelObject;
-}
 
-/* liking a channel on #click */
-function star() {
-    // Toggling star
-    // #7 replace image with icon
-    $('#chat h1 i').toggleClass('fas');
-    $('#chat h1 i').toggleClass('far');
+};
 
-    // #7 toggle star also in data model
+/* function to toggle the star rightside app-bar between solid and unsolid (like/ no like) 
+and chaning of the channelObject.starred value in channel list */
+
+function likeChannel() {
+    $('#rightside .app-bar i').toggleClass('fas far');
+    
+    /* starred value is changed */
     currentChannel.starred = !currentChannel.starred;
 
-    // #7 toggle star also in list
-    $('#channels li:contains(' + currentChannel.name + ') .fa').removeClass('fas far');
-    $('#channels li:contains(' + currentChannel.name + ') .fa').addClass(currentChannel.starred ? 'fas' : 'far');
-}
+    $('#channels li:contains('+currentChannel.name+') .fa-star').removeClass('fas far');
+    $('#channels li:contains('+currentChannel.name+') .fa-star').addClass(currentChannel.starred ? 'fas' : 'far');
 
-/**
- * Function to select the given tab
- * @param tabId #id of the tab
- */
-function selectTab(tabId) {
-    $('#tab-bar button').removeClass('selected');
-    console.log('Changing to tab', tabId);
-    $(tabId).addClass('selected');
-}
+    console.log(currentChannel.name,' starstatus is ',currentChannel.starred);
+};
 
-/**
- * toggle (show/hide) the emojis menu
- */
-function toggleEmojis() {
-    $('#emojis').toggle(); // #toggle
-}
+/* function to add class "selected-tab" to recently clicked tab */
 
-/**
- * #8 This #constructor function creates a new chat #message.
- * @param text `String` a message text
- * @constructor
+function selectTab(tabID) {
+    $('#tab-bar button').removeClass('selected-tab');
+    console.log('Changing to Tab ' + tabID)
+    $(tabID).addClass('selected-tab')
+};
+
+/* function to show the emoji window */
+
+function showEmojis()  {
+    var emojis = require('emojis-list')
+    console.log(emojis[0]);
+    $('#emojis').toggle();
+};
+
+/* section-2 creates new message objects and puts them into the chatarea */
+
+/** @param text
+ *  @constructor
  */
+
+ /* messageObject that performs as a form for newly created messages*/
 function Message(text) {
-    // copy my location
     this.createdBy = currentLocation.what3words;
     this.latitude = currentLocation.latitude;
     this.longitude = currentLocation.longitude;
-    // set dates
-    this.createdOn = new Date() //now
-    this.expiresOn = new Date(Date.now() + 15 * 60 * 1000); // mins * secs * msecs
-    // set text
+    this.createdOn = new Date();
+    this.expiresOn = new Date(Date.now() + 15 * 60 * 1000); /* current time plus 15min (converted to ms) */
     this.text = text;
-    // own message
-    this.own = true;
-}
+    this.own = true; /* always true as messages created are always "own" messages */
+};
 
+
+/* function that is linked with clicking the send button */
 function sendMessage() {
-    // #8 Create a new message to send and log it.
-    //var message = new Message("Hello chatter");
+    /* reading the input out of the message input field */
+    var newMessage = new Message($('#message-input').val());
+    /* reading the number of letters put into the message input field */
+    var textLength = $('#message-input').val().length;
 
-    // #8 let's now use the real message #input
-    var message = new Message($('#message').val());
-    console.log("New message:", message);
+    /* condition to ensure that a message is entered before being able to send the message */
+    if (textLength > 0) {
+       currentChannel.messages.push(newMessage);
+       $('#chat').append(createMessageElement(newMessage));
+       $('#chat').scrollTop($('#chat').prop('scrollHight'));
+       $('#message-input').val('');
+       currentChannel.messageCount++;
+       console.log("New message '", newMessage.text, "' in channel", currentChannel, "with ", textLength, " letters");
+       console.log(currentChannel.name, "has", currentChannel.messageCount, "messages now");
 
-    // #8 convenient message append with jQuery:
-    $('#messages').append(createMessageElement(message));
+    /* alert shown in case of no message entered */
+    } else {
+       alert("You have nothing to say?");
+       console.log("No message created");
+    }
+};
 
-    // #8 messages will scroll to a certain point if we apply a certain height, in this case the overall scrollHeight of the messages-div that increases with every message;
-    // it would also scroll to the bottom when using a very high number (e.g. 1000000000);
-    $('#messages').scrollTop($('#messages').prop('scrollHeight'));
+/* function to create new message field in the chatarea:
+   <div class="message">
+        <h3>
+            <strong><a href="w3w_link">channel_createdBy</a></strong> channel_createdOn 
+            <span class="remaining-time">channel_expiresIn=min left</span>
+        </h3>
+            <p>message_text<button class="button-accent">+5min</button></p>
+    </div>
+*/
 
-    // #8 clear the message input
-    $('#message').val('');
-}
-
-/**
- * #8 This function makes an html #element out of message objects' #properties.
- * @param messageObject a chat message object
- * @returns html element
+/** @param messageObject
+ *  @returns
  */
+
 function createMessageElement(messageObject) {
-    // #8 message properties
+    /* converting the specific time to a period of time (the message is going to remain) */
     var expiresIn = Math.round((messageObject.expiresOn - Date.now()) / 1000 / 60);
-
-    // #8 message element
+    
+    /* create a messageObject and return is back to "sendMessage()" */
     return '<div class="message'+
-        //this dynamically adds the class 'own' (#own) to the #message, based on the
-        //ternary operator. We need () in order to not disrupt the return.
-        (messageObject.own ? ' own' : '') +
-        '">' +
-        '<h3><a href="http://w3w.co/' + messageObject.createdBy + '" target="_blank">'+
-        '<strong>' + messageObject.createdBy + '</strong></a>' +
-        messageObject.createdOn.toLocaleString() +
-        '<em>' + expiresIn+ ' min. left</em></h3>' +
-        '<p>' + messageObject.text + '</p>' +
-        '<button>+5 min.</button>' +
-        '</div>';
-}
+    (messageObject.own ? ' own' : '')+'">'+
+        '<h3>'+
+            '<strong><a href="https://map.what3words.com/' + messageObject.createdBy + '"target="_blank">' + messageObject.createdBy + '</a></strong>' +
+            messageObject.createdOn.toLocaleString() + /* converting the time format */
+            '<span class="remaining-time">' + expiresIn + 'min left</span>'+
+        '</h3>'+
+            '<p>' + messageObject.text + '<button class="button-accent">+5min</button></p>'+
+    '</div>';
+};
 
+/* end of section-2 */
 
-function listChannels() {
-    // #8 channel onload
-    //$('#channels ul').append("<li>New Channel</li>")
+/* section-3 creates new channel list elements */
 
-    // #8 five new channels
-    $('#channels ul').append(createChannelElement(yummy));
-    $('#channels ul').append(createChannelElement(sevencontinents));
-    $('#channels ul').append(createChannelElement(killerapp));
-    $('#channels ul').append(createChannelElement(firstpersononmars));
-    $('#channels ul').append(createChannelElement(octoberfest));
-}
+/* function lists the channels; order determined by "channels" array; onload */
 
-/**
- * #8 This function makes a new jQuery #channel <li> element out of a given object
- * @param channelObject a channel object
- * @returns {HTMLElement}
- */
-function createChannelElement(channelObject) {
-    /* this HTML is build in jQuery below:
-     <li>
-     {{ name }}
-        <span class="channel-meta">
-            <i class="far fa-star"></i>
-            <i class="fas fa-chevron-right"></i>
+/** @param criterion */
+
+function listChannels(criterion) {
+    for (var i=0; i < channels.length; i++) {
+        console.log('add channel:', channels[i]);
+        $('#channels ul').append(createChannelElement(channels[i]));
+    }
+    channels.sort(criterion);
+};
+
+/* function creates channel list object:
+   <li onclick="switchChannel(channel_title)">channel_name
+        <span class="channel-list-icons">
+           <i class"fa? fa-star></i><span>channel_expiresIn+min</span><span>channel_messageCount+new</span><i class="fas fa-chevron-right"></i>
         </span>
-     </li>
-     */
+    </li>
+*/
 
-    // create a channel
+
+/** @param channelObject
+ *  @returns
+ */
+
+ function createChannelElement(channelObject) {
     var channel = $('<li>').text(channelObject.name);
+    channel.click(function() {switchChannel(channelObject)}); /* onclick function added and linked to "switchChannel" function */
+    var channelBar = $('<span>').addClass('channel-list-icons').appendTo(channel);
+    $('<i>').addClass('fa-star').addClass(channelObject.starred ? 'fas' : 'far').appendTo(channelBar); /* star */
+    $('<span>').text(channelObject.expiresIn + ' min').appendTo(channelBar); /* min counter */
+    $('<span>').text(channelObject.messageCount + ' new').appendTo(channelBar); /* message counter */
+    $('<i>').addClass('fas fa-chevron-right').appendTo(channelBar); /* right arrow */
 
-    // create and append channel meta
-    var meta = $('<span>').addClass('channel-meta').appendTo(channel);
+    return channel; /* return newly adjusted variable "channel" to function "listChannels" */
+     
+ }
 
-    // The star including star functionality.
-    // Since we don't want to append child elements to this element, we don't need to 'wrap' it into a variable as the elements above.
-    $('<i>').addClass('fa-star').addClass(channelObject.starred ? 'fas' : 'far').appendTo(meta);
+//  function compareNew(channels) {
+//      return (.createdOn - .createdOn);
+//  }
 
-    // #8 channel boxes for some additional meta data
-    $('<span>').text(channelObject.expiresIn + ' min').appendTo(meta);
-    $('<span>').text(channelObject.messageCount + ' new').appendTo(meta);
+ function compareTrending(channels) {
+    for (var i=0; i < channels.length; i++) {
+     if (channels[i].messageCount < channels[i].messageCount) {
+         return -1;
+     } else {
+         return 1;
+     }
+    } 
+ }
 
-    // The chevron
-    $('<i>').addClass('fas').addClass('fa-chevron-right').appendTo(meta);
+//  function compareFavorites(channels) {
+//      if (.starred = true) {
+//          return -1;
+//      } else {
+//          return 1;
+//      }
+//  }
 
-    // return the complete channel
-    return channel;
-}
+
+
+ /* end of section-3 */
+
+ /* section-4 channel-creation-mode */
+ //var oldAppBar = $('#rightside .app-bar h1');
+ //oldAppBar.data('oldAppBar', createChannel());
+
+ function channelCreationMode() {
+    /* empty messages in chatarea */ 
+    $('#chat').empty();
+    
+    /* swap rightside app-bar title (h1) with input field */
+    $('#rightside .app-bar h1').html('<input type="text" id="channel-input" name="newchannel" placeholder="#ChannelName...">');
+    /* abort button */
+    var abortButton = $('<i class="fas fa-times"> ABORT</i>').appendTo('#rightside .app-bar h1');
+    abortButton.click(function() {abortNewChannel()});
+    /* swap send-button */
+    $('#send-message-button').replaceWith('<button id="create-channel-button" class="button-accent" onclick="createChannel()">CREATE</button>');
+
+ };
+
+ function abortNewChannel () {
+    
+    //oldAppBar.html(oldAppBar.data('oldAppBar'));
+
+    /* switch back to the former channel */
+    switchChannel(currentChannel);
+ };
+
+/** @param name
+ *  @constructor
+ */
+
+ function Channel(name) {
+    this.name = name;
+    this.createdOn = new Date();
+    this.createdBy = currentLocation.what3words;
+    //this.starred = false;
+    //this.expiresIn = 15;
+    //this.messageCount = 20;
+    this.messages = [];
+ }
+
+ function createChannel() {
+     
+    var textLength = $('#message-input').val().length;
+    var hashtag = ($('#message-input').val().startsWith('#'));
+    var spaces = $('#message-input').val().contains(' ');
+
+    if (textLength > 0 && hashtag >= 0 && spaces <= 0) {
+        var newChannel = new Channel($('#channel-input').val());
+        currentChannel = newChannel;
+        console.log('New channel created ', currentChannel);
+
+    } else {
+        alert("Please check your input");
+        console.log("No new channel created");
+    }
+ }
+
+ 

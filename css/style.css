@@ -1,48 +1,39 @@
-/** COLOR PALETTE:
-  *
-  * Background: #F5F5F5 (GREY 100)
-  * Primary Text: black
-  *
-  * Primary color: #3F51B5 (INDIGO)
-  * Primary color_text : white
-  * Accent color: #CDDC39 (LIME)
-  * Accent color_text: black
-  */
+/*
+    color documentation
+    primary text #000000 (black)
+    primary color #1818e2
+    primary color text #ffffff (white)
+    acent color #bdbd0f
+    acent color text #000000 (black)
+    background #e9e6e6
+*/
 
-/* GLOBAL */
+/*GLOBAL*/
 
+/* style settings regarding the whole app surface */
 * {
-    font-family: Roboto, 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
+    font-family: arial, sans-serif;
+    padding: 0px 0px 0px 0px;
+    margin: 0px;
 }
-
 body {
-    background-color: #F5F5F5;
+    background-color: #e9e6e6; 
 }
 
-button, strong {
-    text-transform: uppercase;
-}
 
-/* LAYOUT */
-
-#channels {
+/*LAYOUT*/
+#leftside {
     position: absolute;
     height: 100%;
     width: 40%;
-
-    background-color: #3F51B5; /* temporary background color to see the effect, is completely hidden now */
 }
-
-#chat {
+#rightside {
     position: absolute;
     height: 100%;
     width: 60%;
     left: 40%;
 }
-
-#messages {
+#chat {
     position: absolute;
     width: 100%;
     top: 64px;
@@ -50,238 +41,397 @@ button, strong {
     overflow-y: auto;
 }
 
-/* APP BAR */
-
-h1 {
-    background-color: #3F51B5;
-    color: white;
-
-    /* app-bar: general settings for both bars */
-    height: 64px;
-    font-size: 20px;
-    font-weight: 500;
-
-    /* app-bar spacing */
-    box-sizing: border-box;
-    padding: 24px 16px 20px 16px;
-
-    /* MOOCUS image alignment */
-    position: relative; /* we need this, so that the image's absolute position is relative to the app bar */
+/* style settings for all icons*/
+i {
+    font-size: 24px;
 }
 
-h1#left-app-bar {
+/* style settings for all dot buttons*/
+.dot {
+    border: none;
+    height: 56px;
+    width: 56px;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 2px 3px 3px 0px rgba(41, 41, 41, 0.3);
+}
+
+/* style settings for all buttons*/
+button {
+    height: 36px;
+    min-width: 64px;
+    font-size: 14px;
+    border-radius: 2px;
+    padding-right: 16px;
+    padding-left: 16px;
+    margin: 8px;
+    background-color: white;
+    border-color: none;
+    color: black;
+    text-transform: uppercase;
+}
+
+/* button style 1 */
+.button-primary {
+    background-color: #1818e2;
+    color: white;
+}
+
+/* button style 2 */
+.button-accent {
+    background-color: #bdbd0f;
+    color: black;
+}
+
+/* elavation levels taken from https://stackoverflow.com/questions/30533055/calculating-shadow-values-for-all-material-design-elevations
+ */
+.md-whiteframe-1dp {
+    box-shadow:  0px 1px 3px 0px rgba(0, 0, 0, 0.2),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+    0px 2px 1px -1px rgba(0, 0, 0, 0.12); }
+.md-whiteframe-2dp {
+    box-shadow:  0px 1px 5px 0px rgba(0, 0, 0, 0.2),
+    0px 2px 2px 0px rgba(0, 0, 0, 0.14),
+    0px 3px 1px -2px rgba(0, 0, 0, 0.12); }
+.md-whiteframe-3dp {
+    box-shadow:0px 1px 8px 0px rgba(0, 0, 0, 0.2),
+    0px 3px 4px 0px rgba(0, 0, 0, 0.14),
+    0px 3px 3px -2px rgba(0, 0, 0, 0.12); }
+.md-whiteframe-4dp {
+    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+    0px 4px 5px 0px rgba(0, 0, 0, 0.14),
+    0px 1px 10px 0px rgba(0, 0, 0, 0.12); }
+.md-whiteframe-5dp {
+    box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
+    0px 5px 8px 0px rgba(0, 0, 0, 0.14),
+    0px 1px 14px 0px rgba(0, 0, 0, 0.12); }
+.md-whiteframe-6dp {
+    box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
+    0px 6px 10px 0px rgba(0, 0, 0, 0.14),
+    0px 1px 18px 0px rgba(0, 0, 0, 0.12); }
+.md-whiteframe-7dp {
+    box-shadow: 0px 4px 5px -2px rgba(0, 0, 0, 0.2),
+    0px 7px 10px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 16px 1px rgba(0, 0, 0, 0.12); }
+.md-whiteframe-8dp {
+    box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2),
+    0px 8px 10px 1px rgba(0, 0, 0, 0.14),
+    0px 3px 14px 2px rgba(0, 0, 0, 0.12); }
+.md-whiteframe-9dp {
+    box-shadow: 0px 5px 6px -3px rgba(0, 0, 0, 0.2),
+    0px 9px 12px 1px rgba(0, 0, 0, 0.14),
+    0px 3px 16px 2px rgba(0, 0, 0, 0.12); }
+.md-whiteframe-10dp {
+    box-shadow: 0px 6px 6px -3px rgba(0, 0, 0, 0.2),
+    0px 10px 14px 1px rgba(0, 0, 0, 0.14),
+    0px 4px 18px 3px rgba(0, 0, 0, 0.12); }
+.md-whiteframe-11dp {
+    box-shadow: 0px 6px 7px -4px rgba(0, 0, 0, 0.2),
+    0px 11px 15px 1px rgba(0, 0, 0, 0.14),
+    0px 4px 20px 3px rgba(0, 0, 0, 0.12); }
+.md-whiteframe-12dp {
+    box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2),
+    0px 12px 17px 2px rgba(0, 0, 0, 0.14),
+    0px 5px 22px 4px rgba(0, 0, 0, 0.12); }
+.md-whiteframe-13dp {
+    box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2),
+    0px 13px 19px 2px rgba(0, 0, 0, 0.14),
+    0px 5px 24px 4px rgba(0, 0, 0, 0.12); }
+.md-whiteframe-14dp {
+    box-shadow: 0px 7px 9px -4px rgba(0, 0, 0, 0.2),
+    0px 14px 21px 2px rgba(0, 0, 0, 0.14),
+    0px 5px 26px 4px rgba(0, 0, 0, 0.12); }
+.md-whiteframe-15dp {
+    box-shadow: 0px 8px 9px -5px rgba(0, 0, 0, 0.2),
+    0px 15px 22px 2px rgba(0, 0, 0, 0.14),
+    0px 6px 28px 5px rgba(0, 0, 0, 0.12); }
+.md-whiteframe-16dp {
+    box-shadow: 0px 8px 10px -5px rgba(0, 0, 0, 0.2),
+    0px 16px 24px 2px rgba(0, 0, 0, 0.14),
+    0px 6px 30px 5px rgba(0, 0, 0, 0.12); }
+.md-whiteframe-17dp {
+    box-shadow: 0px 8px 11px -5px rgba(0, 0, 0, 0.2),
+    0px 17px 26px 2px rgba(0, 0, 0, 0.14),
+    0px 6px 32px 5px rgba(0, 0, 0, 0.12); }
+.md-whiteframe-18dp {
+    box-shadow: 0px 9px 11px -5px rgba(0, 0, 0, 0.2),
+    0px 18px 28px 2px rgba(0, 0, 0, 0.14),
+    0px 7px 34px 6px rgba(0, 0, 0, 0.12); }
+.md-whiteframe-19dp {
+    box-shadow: 0px 9px 12px -6px rgba(0, 0, 0, 0.2),
+    0px 19px 29px 2px rgba(0, 0, 0, 0.14),
+    0px 7px 36px 6px rgba(0, 0, 0, 0.12); }
+.md-whiteframe-20dp {
+    box-shadow: 0px 10px 13px -6px rgba(0, 0, 0, 0.2),
+    0px 20px 31px 3px rgba(0, 0, 0, 0.14),
+    0px 8px 38px 7px rgba(0, 0, 0, 0.12); }
+.md-whiteframe-21dp {
+    box-shadow: 0px 10px 13px -6px rgba(0, 0, 0, 0.2),
+    0px 21px 33px 3px rgba(0, 0, 0, 0.14),
+    0px 8px 40px 7px rgba(0, 0, 0, 0.12); }
+.md-whiteframe-22dp {
+    box-shadow: 0px 10px 14px -6px rgba(0, 0, 0, 0.2),
+    0px 22px 35px 3px rgba(0, 0, 0, 0.14),
+    0px 8px 42px 7px rgba(0, 0, 0, 0.12); }
+.md-whiteframe-23dp {
+    box-shadow: 0px 11px 14px -7px rgba(0, 0, 0, 0.2),
+    0px 23px 36px 3px rgba(0, 0, 0, 0.14),
+    0px 9px 44px 8px rgba(0, 0, 0, 0.12); }
+.md-whiteframe-24dp {
+    box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2),
+    0px 24px 38px 3px rgba(0, 0, 0, 0.14),
+    0px 9px 46px 8px rgba(0, 0, 0, 0.12); }
+
+
+/*APP BAR*/
+
+/*  app-bar */
+.app-bar {
+    background-color: #1818e2;
+    color: white;
+    height: 64px;
+    position: relative;
+}
+
+/* title in both app-bars */
+.app-bar h1 {
+    font-size: 25px;
+    font-weight: 500;
+    box-sizing: border-box;
+    padding: 24px 16px 20px 16px;
+}
+
+/* leftside app-bar */
+#leftside .app-bar {
     padding-left: 72px;
 }
 
-h1#left-app-bar img {
+/* chatter-app mascot */
+#leftside .app-bar img {
     position: absolute;
     left: 16px;
     bottom: 0;
 }
 
-h1 a {
+/* location link rightside app-bar */
+.app-bar a {
     color: white;
 }
 
-h1 i {
-    /* #7 #icns #str  */
-    position:absolute;
-    right: 16px;
-    /* #7 #icns #small adjust icon size */
-    font-size:24px;
-}
-
-/* CHANNELS LIST */
-
-ul {
-    list-style-type: none;
-    background-color: white;
+/* star rightside app-bar */
+#rightside .app-bar i {
     position: absolute;
-    width: 100%;
-    top: 64px; /* the app bar's height */
-    bottom: 72px; /* the tab bar's height */
-    overflow-y: auto; /* this adds scroll bars on demand */
+    right: 16px;
 }
 
-li {
-    box-sizing: border-box;
+/* rightside app-bar in CHANNEL-CREATION-MODE */
+
+/* input field */
+#rightside .app-bar input {
+    height: 25px;
+    width: 85%;
+} 
+/* "abort button" */
+.fa-times {
+    font-size: 20px;
+    position: absolute;
+    bottom: 10px;
+}
+
+/*CHANNELS LIST*/
+
+/* channel list is located between app-bar and tab-bar; overflow scroll */
+#channels {
+    background-color: white;
+    list-style-type: none;
+    width: 100%;
+    position: absolute;
+    top: 64px;
+    bottom: 72px;
+    overflow-y: auto;
+}
+
+/* every row in the channel list */
+#channels ul li {
+    font-size: 16px;
     height: 48px;
     padding: 16px;
-    font-size: 16px;
-    border-bottom: 1px solid #F5F5F5;
+    border-bottom: 1px solid #e9e6e6;
+    box-sizing: border-box;
     position: relative;
 }
 
-li .channel-meta {
-    /* right-align channel-meta icons */
+/* horizontal position of the icons in the channel list */
+.channel-list-icons {
     position: absolute;
     right: 16px;
     top: 12px;
-
-    /* #8 #channel #centered blue boxes */
-    display:flex;
+    display: flex;
 }
 
-li .channel-meta span {
-    /* #8 #channel #boxes for the additional metadata */
-    /* color */
+/* vertical position of the icons in the channel list */
+#channels ul li i {
+    vertical-align: middle;
+}
+
+/* time and message counter in the channel list rows */
+.channel-list-icons span {
     background-color: #3F51B5;
     color: white;
-    /* appearance */
     margin: 2px;
     padding: 2px;
     border-radius: 2px;
     font-size: 10px;
-
-    /* #8 #channel #centered blue boxes' text content */
-    align-self:center;
+    align-self: center;
 }
 
-li i.fas, li i.far  {
-    /* #7 #icns #small in channels view */
-    font-size: 24px;
-    padding-left: 4px;
+/* selected channel */;
+#channels .selected-channel {
+    color: #1818e2;
+    border-left: 4px solid #1818e2;
+}
+
+/* FAB */
+#channels .dot {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
 }
 
 
-li.selected {
-    color: #3F51B5;
-    border-left: 4px solid #3F51B5;
-}
-
-/* TAB BAR */
+/*TAB BAR + CHAT BAR*/
 
 #tab-bar, #chat-bar {
     background-color: white;
     text-align: center;
     position: absolute;
     bottom: 0;
+    height: 72px;
     width: 100%;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-#tab-bar button, #chat-bar button {
-    background-color: white;
+#tab-bar button {
     border: none;
-    font-size: 13px;
+    border-radius: 0px;
+    height: auto;
     width: 33%;
-    height: 72px;
-    padding: 16px;
-
-    /* flexify the buttons by growing them equally */
+    margin: none;
     flex-grow: 1;
 }
 
-#tab-bar button.selected {
-    color: #3F51B5;
-    border-bottom: 4px solid #3F51B5;
-}
-
-#tab-bar button i {
-    /* #7 #icns #tab select i instead of img and adjust font size */
+#tab-bar button i, #chat-bar buttom i {
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 4px;
+    margin-bottom: 4px;
     display: block;
-    font-size: 24px;
-    margin: 0 auto 4px auto;
 }
 
-/* CHAT BAR */
+/* selected tab */
+#tab-bar .selected-tab {
+    color: #1818e2;
+    border-bottom: 4px solid #1818e2;
+}
 
+/*CHAT BAR*/
+
+/* emoji button; sendMessage button */
 #chat-bar button {
-    /* override button styles. We set the chat bar to appear like a tab-bar above. This overrides the tab bar's button scaling */
+    font-size: 24px;
     width: auto;
     flex-grow: 0;
-
-    /* #7 #icns #smile adjust fa size */
-    font-size: 24px;
 }
 
-#emojis {
-    /* emoji menu */
-    /* colors and borders */
-    background-color:white;
-    border: 1px solid black;
+/* newMessage input field */
+#message-input {
+    font-size: 16px;
+    border: none;
+    flex-grow: 1;
+}
 
-    /* size & alignment */
+/* emoji window */
+#emojis {
+    background-color: white;
     position: absolute;
     box-sizing: border-box;
     height: 300px;
-    width: 300px;
+    border-block-end-width: 300px;
     left: 16px;
     top: -284px;
     padding: 16px;
-
-    /* font and left-align text */
     text-align: left;
     font-size: 28px;
-
-    /* scroll when it has too many emojis */
     overflow-y: auto;
-
-    /* hide the #smile menu */
     display: none;
 }
 
-/* #8 #input #styles for font, border, and alignment */
-#chat-bar input {
-    /* styles */
-    font-size: 16px;
-    border: none;
-    /* alignment */
-    flex-grow: 1;
-}
+/*CHAT*/
 
-/* MESSAGES */
-
+/* chatarea */
 .message {
     width: 80%;
+    margin-top: 8px;
     margin-bottom: 8px;
     margin-left: 2.5%;
     position: relative;
 }
 
+/* meta data of single message */
 .message h3 {
-    /* Message-meta medium-sized text, non-italic */
     font-size: medium;
-
-    /* messages distribute metadata content evenly with flexbox */
+    color: black;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
 }
 
-.message h3 a {
-    /* What3words link is primary test */
-    color: black;
-
-    width: 30%;
+/* location link; description */
+.message strong {
+    text-transform: uppercase;
 }
 
-.message h3 em {
-    /* Larger text, non-italic*/
-    font-size: larger;
+/* remaining time shown in message meta data */
+.message .remaining-time {
+    font-size: larger; 
     font-style: normal;
-
     width: 20%;
     text-align: right;
 }
 
+/* location link */
+.message a {
+    color: black;
+    width: 30%;
+}
+
+/* message text field */
 .message p {
     background-color: white;
     padding: 16px;
+    box-shadow: 2px 2px rgba(0, 0, 0, 0.2)
 }
 
+/* red square before message text field */
+.message p::before {
+   content: "d";
+   color: red;
+   background-color: red;
+   width: 20px;
+   height: 20px;
+   display: inline-block
+}
+
+/* add 5min button */
 .message button {
-    /* +5 min. button*/
-    background-color: #CDDC39;
-    color: black;
-    text-transform: uppercase;
-
-    /* right/bottom alignment of button */
     position: absolute;
-    right: 8px;
-    bottom: 8px;
+    right: 2px;
+    bottom: 1px;
 }
 
-.message.own {
+/* position setting of own messages */
+.own {
     margin-left: 17.5%;
 }
